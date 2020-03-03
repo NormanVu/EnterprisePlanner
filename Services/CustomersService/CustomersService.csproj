@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    <UserSecretsId>48f625e1-6c67-427e-836a-4cd4f00d6d48</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Library\WebApiDataModel\WebApiDataModel.csproj" />
+    <ProjectReference Include="..\..\Library\WebApiHelpers\WebApiHelpers.csproj" />
+    <ProjectReference Include="..\CustomersBusiness\CustomersBusiness.csproj" />
+    <ProjectReference Include="..\SubscriptionsMessaging\SubscriptionsMessaging.csproj" />
+  </ItemGroup>
+
+</Project>

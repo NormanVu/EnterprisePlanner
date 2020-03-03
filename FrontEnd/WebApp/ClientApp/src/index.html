@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>WebApp</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root>Loading...</app-root>
+  <script>
+    angular.module("KendoDemos", ["kendo.directives"])
+      .controller("MyCtrl", function ($scope) {
+        $scope.mainGridOptions = {
+          dataSource: {
+            type: "json",
+            transport: {
+              read: "/api/Customer/List"
+            },
+            pageSize: 5,
+            serverPaging: true,
+            serverSorting: true
+          },
+          sortable: true,
+          pageable: true,
+          dataBound: function () {
+            this.expandRow(this.tbody.find("tr.k-master-row").first());
+          },
+          columns: [{
+            field: "Id",
+            title: "CustomerID",
+            width: "120px"
+          }, {
+            field: "Name",
+            title: "Customer Name",
+            width: "120px"
+          }]
+        };
+
+        $scope.detailGridOptions = function (dataItem) {
+          return {
+            dataSource: {
+              type: "json",
+              dataType: "GET",
+              transport: {
+                read: "/api/Customer/CustomerDetails/" + dataItem.DepartmentID
+              },
+              serverPaging: true,
+              serverSorting: true,
+              serverFiltering: true,
+              pageSize: 5,
+
+            },
+            scrollable: false,
+            sortable: true,
+            pageable: true,
+            columns: [
+              { field: "Id", title: "ID", width: "56px" },
+              { field: "Name", title: "Name", width: "110px" },
+              { field: "Address", title: "Address", width: "110px" },
+              { field: "Business", title: "Business" }]
+          };
+        };
+      })
+  </script>
+</body>
+</html>
