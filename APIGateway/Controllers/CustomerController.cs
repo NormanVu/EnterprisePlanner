@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using WebApiHelpers.Helpers;
 namespace APIGateway.Controllers
 {
     [Route("api/[controller]")]
-    public class CustomerController : ControllerBase
+    public class CustomerController : Controller
     {
         private readonly CustomersHttpClient _client;
 
@@ -32,7 +33,7 @@ namespace APIGateway.Controllers
             if (customerResponse.IsSuccessStatusCode)
             {
                 var customersStream = await customerResponse.Content.ReadAsStreamAsync();
-                var customers = Serializer.Deserialize<CustomersPagedResult>(customersStream);
+                var customers = Serializer.Deserialize<List<CustomerDTO>>(customersStream);
                 if (customers != null)
                     return StatusCode((int)customerResponse.StatusCode, customers);
             }

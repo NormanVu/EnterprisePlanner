@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomersService", "Service
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomersBusiness", "Services\CustomersBusiness\CustomersBusiness.csproj", "{BD1AF5C6-DAF9-4E30-8D9E-A7195275D30A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SubscriptionsMessaging", "Services\SubscriptionsMessaging\SubscriptionsMessaging.csproj", "{6FDB0B47-1EFC-44BF-AF72-9CBB454B65D0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubscriptionsMessaging", "Services\SubscriptionsMessaging\SubscriptionsMessaging.csproj", "{6FDB0B47-1EFC-44BF-AF72-9CBB454B65D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

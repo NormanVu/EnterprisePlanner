@@ -28,7 +28,13 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
       { path: 'fetch-data', component: FetchDataComponent },
     ])
   ],
-  providers: [],
+  providers: [{ provide: 'API_BASE_URL', useFactory: getBaseAPIGetwayUrl, deps: [] }],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+  static baseApiGetwayUrl = "http://localhost:5000/";
+}
+
+export function getBaseAPIGetwayUrl() {
+  return AppModule.baseApiGetwayUrl;
+}

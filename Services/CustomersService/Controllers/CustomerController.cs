@@ -11,7 +11,7 @@ using AutoMapper;
 namespace CustomersService.Controllers
 {
     [Route("api/[controller]")]
-    public class CustomerController : ControllerBase
+    public class CustomerController : Controller
     {
         private readonly ICustomerRepository _repo;
 
@@ -27,12 +27,12 @@ namespace CustomersService.Controllers
             {
                 var customersFromRepo = _repo.GetCustomers(customerParams).ToList();
                 var customers = Mapper.Map<IEnumerable<CustomerDTO>>(customersFromRepo);
-                CustomersPagedResult result = new CustomersPagedResult
-                {
-                    TotalResultCount = _repo.GetResultCount(),
-                    data = customers.ToList()
-                };
-                return Ok(result);
+                //CustomersPagedResult result = new CustomersPagedResult
+                //{
+                //    TotalResultCount = _repo.GetResultCount(),
+                //    data = customers.ToList()
+                //};
+                return Ok(customers);
             }
             catch (Exception ex)
             {
