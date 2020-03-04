@@ -4,23 +4,16 @@
 
 <p *ngIf="!customers"><em>Loading...</em></p>
 
-<table class='table table-striped' *ngIf="customers">
-  <thead>
-    <tr>
-      <th>Customer ID</th>
-      <th>Name</th>
-      <th>Address</th>
-      <th>Business</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr ng-repeat="customer in customers">
-      <td>{{ customer.id }}</td>
-      <td>{{ customer.name }}</td>
-      <td>{{ customer.address }}</td>
-      <td>{{ customer.business }}</td>
-    </tr>
-  </tbody>
-</table>
+<kendo-grid [kendoGridBinding]="customers"
+            [sortable]="true"
+            [filterable]="true">
 
+  <kendo-grid-column field="id" title="Customer ID"></kendo-grid-column>
 
+  <kendo-grid-column field="name" title="Customer Name"></kendo-grid-column>
+
+  <kendo-grid-column field="address" title="Address"></kendo-grid-column>
+
+  <kendo-grid-column field="business" title="Business"></kendo-grid-column>
+
+</kendo-grid>
