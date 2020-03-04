@@ -45,7 +45,10 @@ namespace CustomersService.Controllers
         {
             try
             {
-                if (!_repo.CustomerExists(id)) { return NotFound(); }
+                if (!_repo.CustomerExists(id))
+                {
+                    return NotFound();
+                }
                 var customer = Mapper.Map<CustomerDTO>(_repo.GetCustomer(id));
                 return Ok(customer);
             }

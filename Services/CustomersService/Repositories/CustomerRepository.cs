@@ -26,7 +26,10 @@ namespace CustomersService.Repositories
 
         public bool CustomerExists(int customerId)
         {
-            return _context.Customers.Any(c => c.Id == customerId);
+            var result = _context.Customers.Where(c => c.Id == customerId).FirstOrDefault();
+            if (result != null)
+                return true;
+            return false;
         }
 
         public void DeleteCustomer(Customer customer)

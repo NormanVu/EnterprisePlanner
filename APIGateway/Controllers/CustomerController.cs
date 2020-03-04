@@ -49,7 +49,8 @@ namespace APIGateway.Controllers
             var customerResponse = await _client.GetAsync(uriBuilder.Uri);
             if (customerResponse.IsSuccessStatusCode)
             {
-                var customer = Serializer.Deserialize<CustomerDTO>(await customerResponse.Content.ReadAsStreamAsync());
+                var customersStream = await customerResponse.Content.ReadAsStreamAsync();
+                var customer = Serializer.Deserialize<CustomerDTO>(customersStream);
                 if (customer != null)
                     return StatusCode((int)customerResponse.StatusCode, customer);
             }
