@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SubscriptionsMessaging", "S
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomersBusiness", "Library\CustomersBusiness\CustomersBusiness.csproj", "{51BD1C46-F5CA-4780-9BC3-AE743F2F7FD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Services\Authentication\Authentication.csproj", "{8E974522-4FDC-462D-9E52-E9508E8DC593}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{51BD1C46-F5CA-4780-9BC3-AE743F2F7FD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{51BD1C46-F5CA-4780-9BC3-AE743F2F7FD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{51BD1C46-F5CA-4780-9BC3-AE743F2F7FD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E974522-4FDC-462D-9E52-E9508E8DC593}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E974522-4FDC-462D-9E52-E9508E8DC593}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E974522-4FDC-462D-9E52-E9508E8DC593}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E974522-4FDC-462D-9E52-E9508E8DC593}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +74,7 @@ Global
 		{2B389EEA-7284-44D9-B171-9A9A5CA567BB} = {FAF6E626-F356-454C-85A2-A27BF9DDDB34}
 		{6FDB0B47-1EFC-44BF-AF72-9CBB454B65D0} = {FAF6E626-F356-454C-85A2-A27BF9DDDB34}
 		{51BD1C46-F5CA-4780-9BC3-AE743F2F7FD7} = {8E0D90FF-DB4B-4695-890D-58DCACABF8BC}
+		{8E974522-4FDC-462D-9E52-E9508E8DC593} = {FAF6E626-F356-454C-85A2-A27BF9DDDB34}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8110D51-5821-4B2C-A54A-EE212C341244}

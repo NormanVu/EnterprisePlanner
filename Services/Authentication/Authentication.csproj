@@ -4,18 +4,19 @@
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
     <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
-    <UserSecretsId>e8e4bf10-4034-47d4-84f0-d57281a0909a</UserSecretsId>
+    <UserSecretsId>05941011-8c6b-4261-aba3-8e23485867cd</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="8.0.0" />
+    <PackageReference Include="FluentValidation.AspNetCore" Version="7.6.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.2.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Services\Authentication\Authentication.csproj" />
-    <ProjectReference Include="..\Services\CustomersService\CustomersService.csproj" />
+    <ProjectReference Include="..\..\Library\WebApiHelpers\WebApiHelpers.csproj" />
   </ItemGroup>
 
 </Project>
