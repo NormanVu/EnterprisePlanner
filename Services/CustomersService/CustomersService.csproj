@@ -14,9 +14,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Library\CustomersBusiness\CustomersBusiness.csproj" />
     <ProjectReference Include="..\..\Library\WebApiDataModel\WebApiDataModel.csproj" />
     <ProjectReference Include="..\..\Library\WebApiHelpers\WebApiHelpers.csproj" />
-    <ProjectReference Include="..\CustomersBusiness\CustomersBusiness.csproj" />
     <ProjectReference Include="..\SubscriptionsMessaging\SubscriptionsMessaging.csproj" />
   </ItemGroup>
 
