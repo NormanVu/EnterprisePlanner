@@ -18,8 +18,6 @@ namespace Authentication.AuthenticationFactory
     {
         private readonly TokenProviderOptions _jwtOptions;
 
-        private readonly RequestDelegate _next;
-
         private readonly JsonSerializerSettings _serializerSettings;
 
 
@@ -62,24 +60,13 @@ namespace Authentication.AuthenticationFactory
             {
                 throw new ArgumentNullException(nameof(TokenProviderOptions.Audience));
             }
-
-            if (options.IdentityResolver == null)
-            {
-                throw new ArgumentNullException(nameof(TokenProviderOptions.IdentityResolver));
-            }
         }
         #endregion
 
-        public JwtAuthenticationFactory(IOptions<TokenProviderOptions> jwtOptions, RequestDelegate next)
+        public JwtAuthenticationFactory(IOptions<TokenProviderOptions> jwtOptions)
         {
             _jwtOptions = jwtOptions.Value;
             ThrowIfInvalidOptions(_jwtOptions);
-
-            _next = next;
-            _serializerSettings = new JsonSerializerSettings
-            {
-                Formatting = Formatting.Indented
-            };
         }
 
         public ClaimsIdentity GenerateClaimsIdentity(string userName, string id)
@@ -115,38 +102,5 @@ namespace Authentication.AuthenticationFactory
 
             return encodedJwt;
         }
-
-        #region Middleware Request Delegate
-        public Task Invoke(HttpContext context)
-        {
-            if (!context.Request.Path.Equals(_jwtOptions.Path, StringComparison.Ordinal))
-            {
-                return _next(context);
-            }
-
-            if (!context.Request.Method.Equals("POST") || !context.Request.HasFormContentType)
-            {
-                context.Response.StatusCode = 400;
-                return context.Response.WriteAsync("Bad request.");
-            }
-
-            var username = context.Request.Form["username"];
-            var password = context.Request.Form["password"];
-            var identity = _jwtOptions.IdentityResolver(username, password);
-            if (identity == null)
-            {
-                context.Response.StatusCode = 400;
-                return context.Response.WriteAsync("Invalid username or password.");
-            }
-
-            var response = new
-            {
-                access_token = GenerateEncodedToken(username, identity),
-                expires_in = (int)_jwtOptions.Expiration.Second
-            };
-            context.Response.ContentType = "application/json";
-            return context.Response.WriteAsync(JsonConvert.SerializeObject(response, _serializerSettings));
-        }
-        #endregion
     }
 }

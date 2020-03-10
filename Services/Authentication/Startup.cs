@@ -7,6 +7,7 @@ using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +21,7 @@ using Authentication.AuthenticationFactory;
 using Authentication.Contexts;
 using Authentication.Models;
 using Authentication.Models.Entities;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace Authentication
 {
@@ -41,7 +42,7 @@ namespace Authentication
         {
             // Add framework services.
             var connectionString = Configuration["ConnectionStrings:DefaultConnection"];
-            //services.AddDbContext<ApplicationDbContext>(o => o.UseMySQL(connectionString));
+            services.AddDbContext<ApplicationDbContext>(o => o.UseMySql(connectionString));
             services.AddSingleton<IJwtAuthenticationFactory, JwtAuthenticationFactory>();
 
             // Get json web token options from app settings
@@ -93,17 +94,16 @@ namespace Authentication
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options => 
             {
                 options.TokenValidationParameters = tokenValidationParameters;
             });
 
+            services.AddAutoMapper();
+
             services.AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
-
-            //services.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -141,7 +141,7 @@ namespace Authentication
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
+            
             app.UseHttpsRedirection();
             app.UseMvc();
         }

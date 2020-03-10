@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Authentication.Models.Entities
 {
-    public class AppRole
+    public class AppRoles
     {
         public int Id { get; set; }
         public string IdentityId { get; set; }

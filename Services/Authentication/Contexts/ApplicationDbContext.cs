@@ -6,8 +6,8 @@ namespace Authentication.Contexts
 {
     public class ApplicationDbContext : IdentityDbContext<AppUser>
     {
-        public ApplicationDbContext(DbContextOptions options) : base(options) { }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
         
-        public DbSet<AppRole> AppRoles { get; set; }
+        public DbSet<AppRoles> AppRoles { get; set; }
     }
 }

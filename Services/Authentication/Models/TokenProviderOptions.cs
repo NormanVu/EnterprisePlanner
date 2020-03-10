@@ -49,11 +49,6 @@ namespace Authentication.Models
         public TimeSpan ValidFor { get; set; } = TimeSpan.FromMinutes(120);
 
         /// <summary>
-        /// Resolves a user identity given a username and password.
-        /// </summary>
-        public Func<string, string, ClaimsIdentity> IdentityResolver { get; set; }
-
-        /// <summary>
         /// "jti" (JWT ID) Claim (default ID is a GUID)
         /// </summary>
         public Func<Task<string>> JtiGenerator => () => Task.FromResult(Guid.NewGuid().ToString());

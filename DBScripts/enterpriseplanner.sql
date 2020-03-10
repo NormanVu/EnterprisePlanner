@@ -31,7 +31,8 @@ CREATE TABLE IF NOT EXISTS `customer` (
 DELETE FROM `customer`;
 /*!40000 ALTER TABLE `customer` DISABLE KEYS */;
 INSERT INTO `customer` (`Id`, `Name`, `Address`, `Business`) VALUES
-	(1, 'Norman Vu', '53 Vung Trung 12, Hoa Hai, Ngu Hanh Son, Da Nang', 'Software Engineering');
+	(1, 'Norman Vu', '53 Vung Trung 12, Hoa Hai, Ngu Hanh Son, Da Nang', 'Software Engineering'),
+	(2, 'Vu Hoang Minh Nhat', 'To 45 Hoa Hai, Ngu Hanh Son, Da Nang', 'Senior Web developer');
 /*!40000 ALTER TABLE `customer` ENABLE KEYS */;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

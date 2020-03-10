@@ -25,7 +25,7 @@ namespace Authentication.Controllers
 
         // POST api/users
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]RegistrationViewModel model)
+        public async Task<IActionResult> Registration([FromBody]RegistrationViewModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -38,10 +38,10 @@ namespace Authentication.Controllers
 
             if (!result.Succeeded) return new BadRequestObjectResult(Constants.Errors.AddErrorsToModelState(result, ModelState));
 
-            await _appDbContext.AppRoles.AddAsync(new AppRole { IdentityId = userIdentity.Id, Location = model.Location });
+            await _appDbContext.AppRoles.AddAsync(new AppRoles {IdentityId = userIdentity.Id, Location = model.Location });
             await _appDbContext.SaveChangesAsync();
 
-            return new OkObjectResult("Account created");
+            return new OkObjectResult("User created");
         }
     }
 }

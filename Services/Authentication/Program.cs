@@ -19,9 +19,8 @@ namespace Authentication
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseKestrel()
-                .UseIISIntegration()
+                .UseDefaultServiceProvider(opts => opts.ValidateScopes = false)
+                .UseUrls("http://*:5002")
                 .UseStartup<Startup>();
     }
 }
