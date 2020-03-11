@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserRegistration } from '../models/userregistration.interface';
-import { ConfigService } from '../utils/config.service';
+import { ConfigService } from './config.service';
 import { BaseService } from './base.service';
 
 import { Observable, BehaviorSubject } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 
@@ -35,6 +34,7 @@ export class UserService extends BaseService {
     let httpHeaders = new HttpHeaders()
       .set('Content-Type', 'application/json')
       .set('Cache-Control', 'no-cache');
+
     let options = {
       headers: httpHeaders
     }; 

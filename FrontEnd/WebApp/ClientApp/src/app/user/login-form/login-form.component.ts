@@ -1,14 +1,14 @@
-import { Subscription } from 'rxjs';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
 
-import { UserLogin } from '../../common/models/userlogin.interface';
-import { UserService } from '../../common/services/user.service';
+import { Subscription } from 'rxjs';
+import { Router, ActivatedRoute } from '@angular/router';
+import { UserLogin } from '../../models/userlogin.interface';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.scss']
+  styleUrls: ['./login-form.component.css']
 })
 export class LoginFormComponent implements OnInit, OnDestroy {
 
@@ -23,7 +23,6 @@ export class LoginFormComponent implements OnInit, OnDestroy {
   constructor(private userService: UserService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-
     // subscribe to router event
     this.subscription = this.activatedRoute.queryParams.subscribe(
       (param: any) => {
@@ -46,7 +45,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         .subscribe(
           result => {
             if (result) {
-              this.router.navigate(['/dashboard/home']);
+              this.router.navigate(['/fetch-data']);
             }
           },
           error => this.errors = error);

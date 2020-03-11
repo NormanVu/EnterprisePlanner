@@ -1,20 +1,31 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../common/modules/shared.module';
-import { UserService } from '../common/services/user.service';
-import { EmailValidator } from '../common/utils/directives/emailvalidator.directive';
-
-import { routing } from './user.routing';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { EmailValidator } from '../commons/utils/directives/emailvalidator.directive';
+import { SpinnerComponent } from '../commons/utils/spinner/spinner.component';
+
+/* services */
+import { UserService } from '../services/user.service';
+import { ConfigService } from '../services/config.service';
+
+/* routers */
+import { RoutingUser } from '../user/user.routing';
+
 
 @NgModule({
-  imports: [
-    CommonModule, FormsModule, routing, SharedModule
+  declarations: [
+    RegistrationFormComponent,
+    LoginFormComponent,
+    EmailValidator
   ],
-  declarations: [RegistrationFormComponent, EmailValidator, LoginFormComponent],
-  providers: [UserService]
+
+  imports: [
+    CommonModule,
+    FormsModule,
+    RoutingUser
+  ],
+  providers: [ConfigService, UserService]
 })
 export class UserModule { }

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Router } from '@angular/router';
 
-import { UserRegistration } from '../../common/models/userregistration.interface';
-import { UserService } from '../../common/services/user.service';
+import { UserRegistration } from '../../models/userregistration.interface';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-registration-form',
   templateUrl: './registration-form.component.html',
-  styleUrls: ['./registration-form.component.scss']
+  styleUrls: ['./registration-form.component.css']
 })
-
 export class RegistrationFormComponent implements OnInit {
 
   errors: string;
@@ -39,4 +39,5 @@ export class RegistrationFormComponent implements OnInit {
           errors => this.errors = errors);
     }
   }
+
 }

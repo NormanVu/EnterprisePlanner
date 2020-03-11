@@ -1,15 +1,19 @@
-import { Component, Input, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy} from '@angular/core';
 
 @Component({
   selector: 'app-spinner',
   templateUrl: './spinner.component.html',
-  styleUrls: ['./spinner.component.scss']
+  styleUrls: ['./spinner.component.css']
 })
+export class SpinnerComponent implements OnInit, OnDestroy {
 
-
-export class SpinnerComponent implements OnDestroy {
   private currentTimeout: number;
   private isDelayedRunning: boolean = false;
+
+  constructor() { }
+
+  ngOnInit() {
+  }
 
   @Input()
   public delay: number = 150;
