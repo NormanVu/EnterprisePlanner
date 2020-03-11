@@ -20,28 +20,18 @@
 
   <ItemGroup>
     <!-- Don't publish the SPA source files, but do show them in the project files list -->
+    <Compile Remove="ClientApp\src\app\shared\**" />
     <Content Remove="$(SpaRoot)**" />
+    <Content Remove="ClientApp\src\app\shared\**" />
+    <EmbeddedResource Remove="ClientApp\src\app\shared\**" />
     <None Remove="$(SpaRoot)**" />
+    <None Remove="ClientApp\src\app\shared\**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="ClientApp\src\app\shared\models\userlogin.interface.ts" />
-    <None Remove="ClientApp\src\app\shared\models\userregistration.interface.ts" />
-    <None Remove="ClientApp\src\app\shared\services\base.service.ts" />
-    <None Remove="ClientApp\src\app\spinner\spinner.component.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\src\app\shared\models\userlogin.interface.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\shared\models\userregistration.interface.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\shared\services\base.service.ts" />
-    <TypeScriptCompile Include="ClientApp\src\app\spinner\spinner.component.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="ClientApp\src\app\shared\modules\" />
-    <Folder Include="ClientApp\src\app\shared\utils\" />
+    <Folder Include="ClientApp\src\app\user\login-form\" />
+    <Folder Include="ClientApp\src\app\user\registration-form\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
