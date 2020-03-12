@@ -4,8 +4,7 @@ import { UserRegistration } from '../models/userregistration.interface';
 import { ConfigService } from './config.service';
 import { BaseService } from './base.service';
 
-import { Observable, BehaviorSubject } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class UserService extends BaseService {
@@ -28,7 +27,7 @@ export class UserService extends BaseService {
     this.baseUrl = configService.getApiEndpointAuthentication();
   }
 
-  register(user: UserRegistration): Observable<UserRegistration> {
+  register(user: UserRegistration) {
     let email = user.email, password = user.password, firstname = user.firstName, lastname = user.lastName, location = user.location;
     let body = JSON.stringify({ email, password, firstname, lastname, location });
     let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');

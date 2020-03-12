@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserLogin } from '../../models/userlogin.interface';
 import { UserService } from '../../services/user.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-form',
@@ -48,7 +49,15 @@ export class LoginFormComponent implements OnInit, OnDestroy {
               this.router.navigate(['/fetch-data']);
             }
           },
-          error => this.errors = error);
+        errors => {
+          var httpErrorResponse: HttpErrorResponse = errors;
+          if (httpErrorResponse != null) {
+            this.errors = httpErrorResponse.message;
+          }
+          else {
+            this.errors = 'Some things go wrong!';
+          }
+        });
     }
   }
 }

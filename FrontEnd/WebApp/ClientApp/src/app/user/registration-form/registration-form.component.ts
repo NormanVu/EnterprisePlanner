@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
-
 import { UserRegistration } from '../../models/userregistration.interface';
 import { UserService } from '../../services/user.service';
 
@@ -24,19 +23,28 @@ export class RegistrationFormComponent implements OnInit {
 
   }
 
-  registerUser({ user, valid }: { user: UserRegistration, valid: boolean }) {
+  registerUser(value: UserRegistration, valid: boolean) {
     this.submitted = true;
     this.isRequesting = true;
     this.errors = '';
     if (valid) {
-      this.userService.register(user)
+      this.userService.register(value)
         .subscribe(
           result => {
             if (result) {
-              this.router.navigate(['/login'], { queryParams: { brandNew: true, email: user.email } });
+              this.router.navigate(['/login'], { queryParams: { brandNew: true, email: value.email } });
             }
           },
-          errors => this.errors = errors);
+        errors => {
+          var httpErrorResponse: HttpErrorResponse = errors;
+          if (httpErrorResponse != null) {
+            this.errors = httpErrorResponse.message;
+          }
+          else
+          {
+            this.errors = 'Some things go wrong!';
+          }
+        });
     }
   }
 
