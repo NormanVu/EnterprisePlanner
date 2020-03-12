@@ -40,6 +40,13 @@ namespace Authentication
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Add policy services.
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAll", p => p.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().AllowCredentials());
+            });
+
+
             // Add framework services.
             var connectionString = Configuration["ConnectionStrings:DefaultConnection"];
             services.AddDbContext<ApplicationDbContext>(o => o.UseMySql(connectionString));
@@ -141,7 +148,7 @@ namespace Authentication
 
             app.UseDefaultFiles();
             app.UseStaticFiles();
-            
+            app.UseCors("AllowAll");
             app.UseHttpsRedirection();
             app.UseMvc();
         }

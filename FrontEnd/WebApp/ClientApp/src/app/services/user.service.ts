@@ -5,9 +5,9 @@ import { ConfigService } from './config.service';
 import { BaseService } from './base.service';
 
 import { Observable, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable()
-
 export class UserService extends BaseService {
 
   baseUrl: string = '';
@@ -30,10 +30,8 @@ export class UserService extends BaseService {
 
   register(user: UserRegistration): Observable<UserRegistration> {
     let email = user.email, password = user.password, firstname = user.firstName, lastname = user.lastName, location = user.location;
-    let body = JSON.stringify({ email, password,firstname, lastname, location });
-    let httpHeaders = new HttpHeaders()
-      .set('Content-Type', 'application/json')
-      .set('Cache-Control', 'no-cache');
+    let body = JSON.stringify({ email, password, firstname, lastname, location });
+    let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
     let options = {
       headers: httpHeaders
@@ -43,13 +41,16 @@ export class UserService extends BaseService {
   }
 
   login(userName, password) {
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
+    let httpHeaders = new HttpHeaders().set('Content-Type', 'application/json');
 
-    return this.http.post(
-        this.baseUrl + '/auth/login',
-        JSON.stringify({ userName, password }), { headers }
-      );
+    let options = {
+      headers: httpHeaders
+    };
+       
+    let UserName = userName;
+    let Password = password;
+    let body = JSON.stringify({ UserName, Password });
+    return this.http.post(this.baseUrl + '/auth/login', body, options);
   }
 
   logout() {
