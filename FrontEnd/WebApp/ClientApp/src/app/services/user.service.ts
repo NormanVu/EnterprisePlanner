@@ -25,7 +25,7 @@ export class UserService extends BaseService {
     // ?? not sure if this the best way to broadcast the status but seems to resolve issue on page refresh where auth status is lost in
     // header component resulting in authenticated user nav links disappearing despite the fact user is still logged in
     this._authNavStatusSource.next(this.loggedIn);
-    this.baseUrl = configService.getApiURI();
+    this.baseUrl = configService.getApiEndpointAuthentication();
   }
 
   register(user: UserRegistration): Observable<UserRegistration> {

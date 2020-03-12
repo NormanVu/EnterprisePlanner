@@ -3,13 +3,13 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class ConfigService {
 
-  _apiURI: string;
+  _apiAuthenticationURI: string;
 
   constructor() {
-    this._apiURI = 'http://localhost:5002/api';
+    this._apiAuthenticationURI = 'http://localhost:5002/api';
   }
 
-  getApiURI() {
-    return this._apiURI;
+  getApiEndpointAuthentication() {
+    return this._apiAuthenticationURI;
   }
 }
