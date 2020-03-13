@@ -5,6 +5,7 @@ using Authentication.ViewModels;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using WebApiHelpers.Helpers;
 
 namespace Authentication.Controllers
@@ -15,12 +16,18 @@ namespace Authentication.Controllers
         private readonly ApplicationDbContext _appDbContext;
         private readonly UserManager<AppUser> _userManager;
         private readonly IMapper _mapper;
+        private readonly JsonSerializerSettings _serializerSettings;
 
         public UsersController(UserManager<AppUser> userManager, IMapper mapper, ApplicationDbContext appDbContext)
         {
             _userManager = userManager;
             _mapper = mapper;
             _appDbContext = appDbContext;
+
+            _serializerSettings = new JsonSerializerSettings
+            {
+                Formatting = Formatting.Indented
+            };
         }
 
         // POST api/users
@@ -41,7 +48,15 @@ namespace Authentication.Controllers
             await _appDbContext.AppRoles.AddAsync(new AppRoles {IdentityId = userIdentity.Id, Location = model.Location });
             await _appDbContext.SaveChangesAsync();
 
-            return new OkObjectResult("User created");
+            var response = new
+            {
+                useridentity = userIdentity.Id,
+                statusmessage = "User created successfully"
+            };
+
+            var json = JsonConvert.SerializeObject(response, _serializerSettings);
+
+            return new OkObjectResult(json);
         }
     }
 }

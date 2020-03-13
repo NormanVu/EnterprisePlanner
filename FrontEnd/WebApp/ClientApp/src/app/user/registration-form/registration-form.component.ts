@@ -3,6 +3,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { UserRegistration } from '../../models/userregistration.interface';
 import { UserService } from '../../services/user.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-registration-form',
@@ -23,29 +24,36 @@ export class RegistrationFormComponent implements OnInit {
 
   }
 
-  registerUser(value: UserRegistration, valid: boolean) {
+  registerUser(fuser: NgForm) {
     this.submitted = true;
     this.isRequesting = true;
     this.errors = '';
-    if (valid) {
-      this.userService.register(value)
+    var user: UserRegistration = {
+      email: fuser.controls['email'].value,
+      password: fuser.controls['password'].value,
+      firstName: fuser.controls['firstName'].value,
+      lastName: fuser.controls['lastName'].value,
+      location: fuser.controls['location'].value
+    };
+    var valid: boolean = fuser.valid;
+    if (valid)
+    {
+      this.userService.register(user)
         .subscribe(
           result => {
             if (result) {
-              this.router.navigate(['/login'], { queryParams: { brandNew: true, email: value.email } });
+              this.router.navigate(['/login'], { queryParams: { brandNew: true, email: user.email } });
             }
           },
-        errors => {
-          var httpErrorResponse: HttpErrorResponse = errors;
-          if (httpErrorResponse != null) {
-            this.errors = httpErrorResponse.message;
-          }
-          else
-          {
-            this.errors = 'Some things go wrong!';
-          }
-        });
+          errors => {
+            var httpErrorResponse: HttpErrorResponse = errors;
+            if (httpErrorResponse != null) {
+              this.errors = httpErrorResponse.message;
+            }
+            else {
+              this.errors = 'Some things go wrong!';
+            }
+          });
     }
   }
-
 }
